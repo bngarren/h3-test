@@ -4,7 +4,7 @@
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
-    "prettier"
+    "plugin:prettier/recommended"
   ],
   "overrides": [
     {
@@ -17,8 +17,8 @@
     }
   ],
   "rules": {
-    // for testing if eslint works properly,
-    // feel free to remove this if you do not need it
+    // Include .prettierrc.js rules
+    "prettier/prettier": "error"
   },
   "settings": {
     "import/parsers": {
