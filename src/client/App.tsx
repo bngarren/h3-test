@@ -2,6 +2,8 @@ import * as React from "react";
 import "./styles/App.css";
 import * as h3 from "h3-js";
 
+const ALTON = [42.3385, -71.1194];
+
 function App() {
   const [latitude, setLatitude] = React.useState<number | null>(null);
   const [longitude, setLongitude] = React.useState<number | null>(null);
@@ -31,13 +33,13 @@ function App() {
 
   return (
     <div className="App">
-      <p>Index: {h3Index}</p>
-      <p>Boundaries: {boundaries}</p>
-      <p>Neighbors: {neighborIndices.toString()}</p>
       <button onClick={getLocation}>Get Location</button>
       <p>{status}</p>
       {latitude && <p>Latitude: {latitude}</p>}
       {longitude && <p>Longitude: {longitude}</p>}
+      {latitude &&
+        longitude &&
+        h3.pointDist([latitude, longitude], ALTON, "km")}
     </div>
   );
 }
