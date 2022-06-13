@@ -1,5 +1,5 @@
 {
-  "name": "vite-react-ts-starter",
+  "name": "h3-test",
   "private": true,
   "version": "0.0.1",
   "scripts": {
@@ -8,12 +8,13 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2"
+    "h3-js": "^3.7.2",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0"
   },
   "devDependencies": {
-    "@types/react": "^17.0.33",
-    "@types/react-dom": "^17.0.10",
+    "@types/react": "^18.0.12",
+    "@types/react-dom": "^18.0.5",
     "@typescript-eslint/eslint-plugin": "^5.19.0",
     "@typescript-eslint/parser": "^5.19.0",
     "@vitejs/plugin-react": "^1.0.7",
