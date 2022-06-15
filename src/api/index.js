@@ -13,7 +13,9 @@ app.use(bodyParser.json());
 const cors = require("cors");
 app.use(
   cors({
-    origin: "*",
+    origin: true,
+    preflightContinue: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
   })
 );
 
