@@ -1,8 +1,11 @@
-/* eslint-env es6 */
-/* eslint-disable */
-
 const express = require("express");
+const bodyParser = require("body-parser");
 const app = express();
+app.use(bodyParser.json());
+
+const knexConfig = require("./db/knexfile");
+//initialize knex
+const knex = require("knex")(knexConfig[process.env.NODE_ENV]);
 
 // define the first route
 app.get("/", function (req, res) {
