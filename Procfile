@@ -1,1 +1,1 @@
-web: node src/api/index.js
+web: nodemon src/api/index.js

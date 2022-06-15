@@ -8,15 +8,33 @@ require("dotenv").config({
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+const cors = require("cors");
+app.use(
+  cors({
+    origin: "*",
+  })
+);
 
-const knexConfig = require("./db/knexfile");
-//initialize knex
-const knex = require("knex")(knexConfig[process.env.NODE_ENV]);
+const db = require("./db/db.js");
 
-// define the first route
-app.get("/", function (req, res) {
-  res.send("<h1>Hello World!</h1>");
+const h3 = require("h3-js");
+
+app.get("/", async function (req, res) {
+  db("resource")
+    .select()
+    .then((resources) => {
+      res.json({ resources });
+    });
+});
+
+// Let's accept a GeolocationPosition object from the client and return the H3 index
+app.post("/scan", async function (req, res) {
+  console.log("Server received: ", req.body);
+
+  const h3Index = h3.geoToH3(req.body.latitude, req.body.longitude, 9);
+  res.send(h3Index);
 });
 
 // start the server listening for requests
