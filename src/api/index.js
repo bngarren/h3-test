@@ -1,3 +1,10 @@
+// To use the .env file, we use the dotenv module to load the values
+// Have to give the dotenv config the relative path to .env for it to work properly
+const path = require("path");
+require("dotenv").config({
+  path: path.resolve(__dirname, "../../.env"),
+});
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
