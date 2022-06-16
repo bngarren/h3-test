@@ -5,6 +5,11 @@ require("dotenv").config({
   path: path.resolve(__dirname, "../../.env"),
 });
 
+const CORS_ALLOWED_ORIGINS = [
+  "http://localhost:3000",
+  "https://master--h3-test.netlify.app",
+];
+
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
@@ -13,7 +18,7 @@ app.use(bodyParser.json());
 const cors = require("cors");
 app.use(
   cors({
-    origin: ["http://localhost:3000", "https://master--h3-test.netlify.app"],
+    origin: CORS_ALLOWED_ORIGINS,
     credentials: true,
     preflightContinue: true,
     allowedHeaders: ["Content-Type"],
@@ -21,25 +26,11 @@ app.use(
 );
 app.options("*", cors());
 
-const db = require("./db/db.js");
+const routes = require("./routes");
 
-const h3 = require("h3-js");
+app.get("/", (req, res) => res.send("Backend is working!"));
 
-app.get("/", async function (req, res) {
-  db("resource")
-    .select()
-    .then((resources) => {
-      res.json({ resources });
-    });
-});
-
-// Let's accept a GeolocationPosition object from the client and return the H3 index
-app.post("/scan", async function (req, res) {
-  console.log("Server received: ", req.body);
-
-  const h3Index = h3.geoToH3(req.body.latitude, req.body.longitude, 9);
-  res.send(h3Index);
-});
+app.use("/api", routes);
 
 // start the server listening for requests
 app.listen(process.env.PORT || 3001, () => console.log("Server is running..."));
