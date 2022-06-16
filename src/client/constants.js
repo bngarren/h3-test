@@ -1,5 +1,5 @@
 const production = {
-  url: "https://resource-app-backend.herokuapp.com/",
+  url: "https://resource-app-backend.herokuapp.com",
 };
 const development = {
   url: "http://localhost:5000",
