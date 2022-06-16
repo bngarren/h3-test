@@ -11,7 +11,13 @@ const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 const cors = require("cors");
-app.use(cors());
+app.use(
+  cors({
+    origin: ["http://localhost:3000", "https://master--h3-test.netlify.app"],
+    credentials: true,
+    preflightContinue: true,
+  })
+);
 app.options("*", cors());
 
 const db = require("./db/db.js");
